@@ -22,6 +22,6 @@ public class Serialisation {
         JsonObject jsonContainer = new JsonObject();
         jsonContainer.addProperty("nom", c.getNom());
         jsonContainer.addProperty("prenom", c.getPrenom());
-        
+        return jsonContainer;
     }
 }
