@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Posit'IF</title>
+        <meta charset="UTF-8">
+
+        <!-- Librairie Javascript: jQuery (v3.3.1) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+        <style>
+            /* Feuille de Style CSS (dans la page) */
+            #message { margin: 25px; padding: 10px; border-radius: 10px; border: 2px solid violet; }
+            button.joli-bouton { padding: 3px 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
+        </style>
+    </head>
+    <body>
+        <h1>Posit'IF</h1>
+        <h2>Formulaire de connexion</h2>
+
+        <div>
+            Identifiant : <input type="text" id="champ-login" name="login" placeholder="votre identifiant" /><br>
+            Mot de passe : <input type="password" id="champ-password" name="password" /><br>
+            <button id="bouton-connexion" class="joli-bouton">Se Connecter</button>   
+        </div>
+
+        <div id="message">...</div>
+        
+        <script>
+
+            function connexion() {
+
+                var champLogin = $('#champ-login').val();
+                var champPassword = $('#champ-password').val();
+
+                // Message d'information dans la div #message :
+                $('#message').html('Connexion en cours...');
+
+                // Requête AJAX
+                $.ajax({
+
+                    url: 'ActionServlet', // URL
+                    method: 'POST',         // Méthode
+                    data: {                 // Paramètres
+                        todo: 'connexion',
+                        login: champLogin,
+                        password: champPassword
+                    },
+                    dataType: 'json'        // Type de retour attendu
+
+                }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
+
+                    // ici votre code...
+                    // 
+                    // si connexion ok, aller sur la page suivante :
+                    //window.location = "maPageSuivante.html";
+                    // si connexion pas ok afficher un texte dans la div #message :
+                    $('#message').html('Echec de la connexion');
+
+                }).fail( function (error) { // Appel KO => erreur a gérer
+                    
+                    // Popup avec message d'erreur :
+                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                    // Message d'erreur dans la div #message :
+                    $('#message').html('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+
+                });
+            }
+
+            $(document).ready(function () {
+
+                console.log('Page chargee => Debut du Script');
+
+                // ajout d'un "handler" sur le clic du bouton de connexion
+                $('#bouton-connexion').on('click', function () {
+
+                    // affichage pour debugage dans la console javascript du navigateur
+                    console.log('Click sur le bouton "Se Connecter"');
+
+                    // appel de la fonction connexion
+                    connexion();
+
+                });
+
+            });
+            
+        </script>
+    </body>
+</html>
