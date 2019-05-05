@@ -53,6 +53,8 @@ public class ActionServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String todo = request.getParameter("todo");
         Action action = null;
+        Serialisation serialisation = null;
+        
         if("connexion".equals(todo)){
             String mail = request.getParameter("login");
             
@@ -64,6 +66,10 @@ public class ActionServlet extends HttpServlet {
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("{\"connexion\": true, \"message\":\"OK\"}");
+            
+            //serialisation = new ClientSerialisation();
+            serialisation = new EmployeSerialisation();
+            serialisation.serialiser(request, response);
         }
         JpaUtil.destroy();
     }

@@ -7,6 +7,7 @@ package fr.insalyon.b3246.dasi.positif_appliweb;
 
 import javax.servlet.http.HttpServletRequest;
 import metier.modele.Client;
+import metier.modele.Employe;
 
 import metier.service.Service;
 
@@ -21,11 +22,13 @@ public class ActionConnexion extends Action {
         String mail = request.getParameter("login");
         String password = request.getParameter("password");
             
-        Client client = Service.trouverClient(mail, password);  
-        request.setAttribute("client", client);
+        //il faudra définir un paramètre permettant de distinguer si c'est un client ou un employe qui se connecte
+        /*Client client = Service.trouverClient(mail, password);  
+        request.setAttribute("client", client);*/
         
+        Employe employe = Service.trouverEmploye(mail, password);  
+        request.setAttribute("employe", employe);
         return true;
-            
            
     }
     

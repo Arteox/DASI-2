@@ -16,12 +16,14 @@ import metier.modele.Client;
  *
  * @author bpauletto
  */
-public class Serialisation {
+
+public abstract class Serialisation {
     
-    public JsonObject serialiserClient(Client c){
-        JsonObject jsonContainer = new JsonObject();
-        jsonContainer.addProperty("nom", c.getNom());
-        jsonContainer.addProperty("prenom", c.getPrenom());
-        return jsonContainer;
+    protected PrintWriter getWriterWithJsonHeader(HttpServletResponse response) throws IOException {
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        return out;
     }
+    
+    public abstract void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException;
 }
