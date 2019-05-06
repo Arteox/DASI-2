@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.insalyon.b3246.dasi.positif_appliweb;
 
 
@@ -53,6 +48,8 @@ public class ActionServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String todo = request.getParameter("todo");
         Action action = null;
+        Serialisation serialisation = null;
+        
         if("connexion".equals(todo)){
             String mail = request.getParameter("login");
             
@@ -64,6 +61,10 @@ public class ActionServlet extends HttpServlet {
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("{\"connexion\": true, \"message\":\"OK\"}");
+            
+            //serialisation = new ClientSerialisation();
+            serialisation = new EmployeSerialisation();
+            serialisation.serialiser(request, response);
         }
         JpaUtil.destroy();
     }
@@ -108,3 +109,4 @@ public class ActionServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
