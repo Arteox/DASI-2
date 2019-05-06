@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import metier.modele.Client;
+import metier.modele.Employe;
 import metier.service.*;
 
 /*
@@ -55,22 +57,51 @@ public class ActionServlet extends HttpServlet {
         Action action = null;
         Serialisation serialisation = null;
         
-        if("connexion".equals(todo)){
-            String mail = request.getParameter("login");
-            
-            action = new ActionConnexion();
-            action.executer(request);
-           
-            session.setAttribute("utilisateur", mail);
-            
-            response.setContentType("application/json;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("{\"connexion\": true, \"message\":\"OK\"}");
-            
-            //serialisation = new ClientSerialisation();
-            serialisation = new EmployeSerialisation();
-            serialisation.serialiser(request, response);
+        response.setContentType("application/json;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        switch (todo) {
+            case "connexionClient":
+                action = new ActionConnexionClient();
+
+                if(action.executer(request)){
+                    Client client = Service.trouverClient(request.getParameter("login"), request.getParameter("password"));
+                    session.setAttribute("client", client);
+                    out.println("{\"connexion\": true, \"message\":\"OK\"}");
+
+                    //serialisation = new ClientSerialisation();
+                    //serialisation = new EmployeSerialisation();
+                    //serialisation.serialiser(request, response);
+                } else {
+                    out.println("{\"connexion\": false, \"message\":\"Erreur de login\"}");
+                }
+                break;
+                
+            case "connexionEmploye":
+                action = new ActionConnexionEmploye();
+
+                if(action.executer(request)){
+                    Employe employe = Service.trouverEmploye(request.getParameter("login"), request.getParameter("password"));
+                    session.setAttribute("employe", employe);
+                    out.println("{\"connexion\": true, \"message\":\"OK\"}");
+
+                } else {
+                    out.println("{\"connexion\": false, \"message\":\"Erreur de login\"}");
+                }
+                break;
+                
+            case "inscription":
+                action = new ActionInscriptionClient();
+                
+                if (action.executer(request)){
+                    out.println("{\"inscription\": true, \"message\":\"checkez vos mails\"}");;
+                } else {
+                    out.println("{\"inscription\": false, \"message\":\"Erreur dans l'inscription\"}");
+                }
+                break;
         }
+        
+        
         JpaUtil.destroy();
     }
 

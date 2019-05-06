@@ -15,19 +15,20 @@ import metier.service.Service;
  *
  * @author bpauletto
  */
-public class ActionConnexion extends Action {
+public class ActionConnexionEmploye extends Action {
 
     @Override
     public boolean executer(HttpServletRequest request) {
         String mail = request.getParameter("login");
         String password = request.getParameter("password");
             
-        //il faudra définir un paramètre permettant de distinguer si c'est un client ou un employe qui se connecte
-        /*Client client = Service.trouverClient(mail, password);  
-        request.setAttribute("client", client);*/
-        
-        Employe employe = Service.trouverEmploye(mail, password);  
+        Employe employe = Service.trouverEmploye(mail, password);
         request.setAttribute("employe", employe);
+        
+        if (employe == null){
+            return false;
+        }
+        
         return true;
            
     }

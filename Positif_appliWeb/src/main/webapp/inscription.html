@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Inscription</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Librairie Javascript: jQuery (v3.3.1) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+        <h1>Posit'IF</h1>
+            <div>
+                <p> Civilité 
+                    <input type="radio" id="radio-M" name="radioS" value="M"/>
+                    <label for="M">M</label>
+                    <input type="radio" id="radio-F" name="radioS" value="F"/>
+                    <label for="F">F</label>
+                    <input type="radio" id="radio-Autre" name="radioS" value="Autre" checked/>
+                    <label for="Autre">Autre</label>
+                </p>
+            </div>
+            <div>
+                <p>
+                    Nom 
+                    <input type="text" id="nom" placeholder="Votre nom..." required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Prénom 
+                    <input type="text" id="prenom" placeholder="Votre prenom..." required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Naissance 
+                    <input type="date" id="naissance" required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Adresse 
+                    <input type="text" id="adresse" placeholder="13 rue ..." required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Ville 
+                    <input type="text" id="ville" placeholder="Villeurbanne.." required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Code postal 
+                    <input type="number" id="code-postal" min="0" placeholder="69100" required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Téléphone 
+                    <input type="tel" id="telephone" placeholder="06..." required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Email 
+                    <input type="email" id="mail" placeholder="baptiste@louis.com" required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Mdp
+                    <input type="password" id="mdp" pattern=".{3,}" required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    ConfirmerMdp 
+                    <input type="password" id="confirmer-mdp" required />
+                </p>
+            </div>
+            <div>
+                <p>
+                    Accepter CGU
+                    <input type="checkbox" id="cgu" required checked/>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <button id="bouton-inscription">Valider</button> 
+                </p>
+            </div>
+
+        <div id="message-erreur"></div>
+        <script>
+            
+            function inscription(){
+                
+                let champCivilite = $("input[name='radioS']:checked").val();
+                let champNom = $('#nom').val();
+                let champPrenom = $('#prenom').val();
+                let champNaissance = $('#naissance').val();
+                let champAdresse = $('#adresse').val();
+                let champVille = $('#ville').val();
+                let champCodePostal = $('#code-postal').val();
+                let champTelephone = $('#telephone').val();
+                let champMail = $('#mail').val();
+                let champMdp = $('#mdp').val();
+                let champConfirmerMdp = $('#confirmer-mdp').val();
+                
+                if(champMdp !== champConfirmerMdp){
+                    $("#message-erreur").html("Les mots de passe sont différents !");
+                    return; 
+                } else {
+                    // Requête AJAX
+                    $.ajax({
+                        url: 'ActionServlet', // URL
+                        method: 'POST',         // Méthode
+                        data: {                 // Paramètres
+                            todo: 'inscription',
+                            civilite: champCivilite,
+                            nom: champNom,
+                            prenom: champPrenom,
+                            naissance: champNaissance,
+                            adresse: champAdresse,
+                            ville: champVille,
+                            codePostal: champCodePostal,
+                            telephone: champTelephone,
+                            mail: champMail,
+                            mdp: champMdp
+                        },
+                        dataType: 'json'        // Type de retour attendu
+                        }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
+                            console.log("yoo mec ");
+                            alert("Inscription validée, checkez vos mails !");
+                            // si inscription ok, aller sur la page suivante :
+                            window.location = "index.html";
+                        }).fail( function (error) { // Appel KO => erreur a gérer
+                            // Popup avec message d'erreur :
+                            alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                            // Message d'erreur dans la div #message :
+                            $('#message-erreur').html('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                        });
+                    }
+                }
+        
+            $(document).ready(function () {
+
+                console.log('Page chargee => Debut du Script');
+        
+                $("#bouton-inscription").click(function (){
+                    inscription();
+                });
+            });
+            
+        </script>
+    </body>
+    
+   
+</html>
