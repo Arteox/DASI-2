@@ -6,6 +6,11 @@
 package fr.insalyon.b3246.dasi.positif_appliweb;
 
 
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.Serialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionInscriptionClient;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionConnexionEmploye;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionConnexionClient;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.Action;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;

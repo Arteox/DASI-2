@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.b3246.dasi.positif_appliweb;
+package fr.insalyon.b3246.dasi.positif_appliweb.actions;
 
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.Action;
 import javax.servlet.http.HttpServletRequest;
 import metier.modele.Client;
 import metier.modele.Employe;

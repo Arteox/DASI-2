@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.insalyon.b3246.dasi.positif_appliweb;
+package fr.insalyon.b3246.dasi.positif_appliweb.actions;
 
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.Action;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
