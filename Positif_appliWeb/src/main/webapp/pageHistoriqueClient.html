@@ -26,7 +26,11 @@ and open the template in the editor.
         <button id="bouton-deconnexion">Déconnexion</button>
         
         <h2> Historique des demandes de voyance </h2>
-        
+        <div>
+            <div id="historique-client"></div>
+            <div class="valeur" id="date-demande-debut"></div>
+            <div class="valeur" id="date-demande-fin"></div>
+        </div>
         <script>
             
             function chargementHistorique() {
@@ -40,7 +44,24 @@ and open the template in the editor.
                     },
                     dataType: 'json'        // Type de retour attendu
                 }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
-                    console.log("oh boloss");
+                    if (response.voyances){
+                        for (let i in response.voyances){
+                            let demandeDebut =  $('<div />').addClass("#date-demande-debut").html(response.voyances[i].dateDemande);
+                            $("#historique-client").append(demandeDebut);
+                            let mediumNom =  $('<div />').addClass("#medium-nom").html(response.voyances[i].mediumNom);
+                            $("#historique-client").append(mediumNom);
+                            let demandeAcceptee;
+                            if (response.voyances[i].accepte == true){
+                                demandeAcceptee =  $('<div />').addClass("#accepte").html("Demande acceptée");
+                            }
+                            else {
+                                demandeAcceptee =  $('<div />').addClass("#accepte").html("Medium indisponible");
+                            }
+                            $("#historique-client").append(demandeAcceptee);
+                            $("#historique-client").append("<br/>");
+                            
+                        }
+                    }
                 }).fail( function (error) { // Appel KO => erreur a gérer
                     // Popup avec message d'erreur :
                     alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));

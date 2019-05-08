@@ -37,15 +37,19 @@ public class HistoriqueSerialisation extends Serialisation {
         
         for (DemandeDeVoyance voyance : voyances){
             String dateDemande = dateFormat.format(voyance.getDate_demande());
-            String dateFin = dateFormat.format(voyance.getDate_fin());
-        
+            String dateFin = "";
+            if (voyance.getDate_fin() != null) {
+                dateFin = dateFormat.format(voyance.getDate_fin());
+            }
             JsonObject jsonVoyance = new JsonObject();
 
             jsonVoyance.addProperty("id", voyance.getId());
-            jsonVoyance.addProperty("date-demande", dateDemande);
-            jsonVoyance.addProperty("date-fin", dateFin);
+            jsonVoyance.addProperty("dateDemande", dateDemande);
+            jsonVoyance.addProperty("dateFin", dateFin);
             jsonVoyance.addProperty("accepte", voyance.getAccepte());
             jsonVoyance.addProperty("commentaire", voyance.getCommentaire());
+            jsonVoyance.addProperty("mediumNom", voyance.getMedium().getNom());
+            
             
             jsonArrayVoyances.add(jsonVoyance);
             

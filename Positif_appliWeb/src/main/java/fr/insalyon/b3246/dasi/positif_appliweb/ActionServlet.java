@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import metier.modele.Client;
+import metier.modele.DemandeDeVoyance;
 import metier.modele.Employe;
 import metier.service.*;
 
@@ -58,8 +59,8 @@ public class ActionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         JpaUtil.init();
         HttpSession session = request.getSession(true);
         request.setCharacterEncoding("UTF-8");
@@ -110,7 +111,7 @@ public class ActionServlet extends HttpServlet {
             case "profil":
                 //On récupère l'identité du client depuis la session
                 Client clientProfil = (Client) session.getAttribute("client");
-                if(clientProfil != null){
+                if (clientProfil != null){
                     request.setAttribute("client",clientProfil);
                     serialisation = new ClientSerialisation();
                     serialisation.serialiser(request,response);
@@ -137,7 +138,6 @@ public class ActionServlet extends HttpServlet {
                 action = new ActionAffichageHistorique();
                 
                 if(action.executer(request)){
-                    out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement de l'historique\"}");
                     serialisation = new HistoriqueSerialisation();
                     serialisation.serialiser(request, response);
                 } else {
