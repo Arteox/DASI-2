@@ -32,7 +32,6 @@ public class ListeClientsSerialisation extends Serialisation{
         
         JsonArray jsonArrayClients = new JsonArray();
         List<Client> clients = (List<Client>)request.getAttribute("clients");
-        clients = (List<Client>)request.getAttribute("clients");
         
         for (Client client : clients){
         

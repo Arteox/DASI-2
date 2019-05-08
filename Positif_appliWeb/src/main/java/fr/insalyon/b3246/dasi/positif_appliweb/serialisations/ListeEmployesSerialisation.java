@@ -30,7 +30,6 @@ public class ListeEmployesSerialisation extends Serialisation{
         
         JsonArray jsonArrayEmployes = new JsonArray();
         List<Employe> employes = (List<Employe>)request.getAttribute("employes");
-        employes = (List<Employe>)request.getAttribute("employes");
         
         for (Employe employe : employes){
         

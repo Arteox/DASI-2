@@ -16,7 +16,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dao.JpaUtil;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -115,8 +117,17 @@ public class ActionServlet extends HttpServlet {
                 } else {
                     out.println("{\"profil\": false, \"message\":\"Client introuvable\"}");
                 }
-
                 break;
+                
+            case "chargerMedium":
+                action = new ActionChargerMedium();
+                
+                if (action.executer(request)){
+                    serialisation = new ListeMediumsSerialisation();
+                    serialisation.serialiser(request, response);
+                } else {
+                    out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement des mediums\"}");
+                }
         }
         
         

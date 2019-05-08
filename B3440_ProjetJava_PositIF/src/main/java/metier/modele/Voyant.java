@@ -30,6 +30,10 @@ public class Voyant extends Medium{
     public String toString() {
         return "Voyant{" +super.toString()+ "specialite=" + specialite + '}';
     }
+
+    public String getSpecialite() {
+        return specialite;
+    }
     
     public String getType()
     {

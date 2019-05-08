@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Historique voyance - Posit'IF</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            /* Feuille de Style CSS (dans la page) */
+            .medium { border: 2px solid blanchedalmond }
+            .bouton-choix-medium { padding: 3px 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
+            
+        </style>
+        <!-- Librairie Javascript: jQuery (v3.3.1) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
+    </head>
+    <body>
+        <h1> Posit'IF </h1>
+        <button id="bouton-medium">Consulter médium</button>
+        <button id="bouton-historique">Historique</button>
+        <button id="bouton-profil">Profil Astrologique</button>
+        <button id="bouton-deconnexion">Déconnexion</button>
+        
+        <h2> Historique des demandes de voyance </h2>
+        
+        <script>
+
+                $(document).ready(function () {
+
+                    console.log('Page chargee => Debut du Script');
+                
+                    //Handlers au clic du menu (commun à toutes les pages du menu client)
+                    $('#bouton-profil').on('click', function () {
+                        window.location = "profilClient.html";
+                    });
+
+                    $('#bouton-medium').on('click', function () {
+                        window.location = "pagePrincipaleClient.html";
+                    });
+
+                    $('#bouton-historique').on('click', function () {
+                        window.location = "pageHistoriqueClient.html";
+                });
+
+            });
+        </script>
+        
+    </body>
+</html>

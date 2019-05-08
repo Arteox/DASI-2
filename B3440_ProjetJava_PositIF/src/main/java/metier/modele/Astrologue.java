@@ -37,4 +37,12 @@ public class Astrologue extends Medium{
     {
         return "Astrologue";
     }
+
+    public String getFormation() {
+        return formation;
+    }
+
+    public String getPromotion() {
+        return promotion;
+    }
 }
