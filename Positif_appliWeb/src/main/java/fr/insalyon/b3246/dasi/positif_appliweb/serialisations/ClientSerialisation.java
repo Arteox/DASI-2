@@ -31,22 +31,22 @@ public class ClientSerialisation extends Serialisation {
         JsonObject jsonClient = new JsonObject();
         Client client = (Client) request.getAttribute("client");
         
-        jsonClient.addProperty("adresse postale", client.getAdressePostale());
-        jsonClient.addProperty("animal totem", client.getAnimalTotem());
+        jsonClient.addProperty("adresse-postale", client.getAdressePostale());
+        jsonClient.addProperty("totem", client.getAnimalTotem());
         jsonClient.addProperty("civilite", client.getCivilite());
-        jsonClient.addProperty("couleur porte bonheur", client.getCouleurPorteBonheur());
+        jsonClient.addProperty("bonheur", client.getCouleurPorteBonheur());
         jsonClient.addProperty("email", client.getEmail());
         jsonClient.addProperty("id", client.getId());
         jsonClient.addProperty("mot de passe", client.getMdp());
         jsonClient.addProperty("nom", client.getNom());
         jsonClient.addProperty("telephone", client.getNumtel());
         jsonClient.addProperty("prenom", client.getPrenom());
-        jsonClient.addProperty("signe chinois", client.getSigneChinois());
-        jsonClient.addProperty("signe zodiaque", client.getSigneZodiaque());
+        jsonClient.addProperty("chinois", client.getSigneChinois());
+        jsonClient.addProperty("zodiaque", client.getSigneZodiaque());
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         String dateNaissance = dateFormat.format(client.getDateNaissance());  
-        jsonClient.addProperty("date de naissance", dateNaissance);
+        jsonClient.addProperty("naissance", dateNaissance);
         
         jsonContainer.add("client", jsonClient);
         

@@ -9,8 +9,30 @@ and open the template in the editor.
         <title>Page principale - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Librairie Javascript: jQuery (v3.3.1) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
     </head>
     <body>
         <button id="bouton-profil">Profil Astrologique</button>
+        
+        <script>
+
+            $(document).ready(function () {
+
+                console.log('Page chargee => Debut du Script');
+
+                // ajout d'un "handler" sur le clic du bouton de connexion
+                $('#bouton-profil').on('click', function () {
+                    window.location = "profilClient.html";
+                });
+                
+            });
+            
+        </script>
+        
+        
+        
     </body>
 </html>

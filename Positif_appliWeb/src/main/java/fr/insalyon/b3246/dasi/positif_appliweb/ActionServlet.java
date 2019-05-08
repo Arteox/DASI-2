@@ -16,6 +16,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dao.JpaUtil;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -99,10 +100,22 @@ public class ActionServlet extends HttpServlet {
                 action = new ActionInscriptionClient();
                 
                 if (action.executer(request)){
-                    out.println("{\"inscription\": true, \"message\":\"checkez vos mails\"}");;
+                    out.println("{\"inscription\": true, \"message\":\"checkez vos mails\"}");
                 } else {
                     out.println("{\"inscription\": false, \"message\":\"Erreur dans l'inscription\"}");
                 }
+                break;
+                
+            case "profil":
+                Client client = (Client) session.getAttribute("client");
+                if(client != null){
+                    request.setAttribute("client",client);
+                    serialisation = new ClientSerialisation();
+                    serialisation.serialiser(request,response);
+                } else {
+                    out.println("{\"profil\": false, \"message\":\"Client introuvable\"}");
+                }
+
                 break;
         }
         
