@@ -16,8 +16,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dao.JpaUtil;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAffichageHistorique;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -77,9 +79,6 @@ public class ActionServlet extends HttpServlet {
                     session.setAttribute("client", client);
                     out.println("{\"connexion\": true, \"message\":\"OK\"}");
 
-                    //serialisation = new ClientSerialisation();
-                    //serialisation = new EmployeSerialisation();
-                    //serialisation.serialiser(request, response);
                 } else {
                     out.println("{\"connexion\": false, \"message\":\"Erreur de login\"}");
                 }
@@ -109,9 +108,10 @@ public class ActionServlet extends HttpServlet {
                 break;
                 
             case "profil":
-                Client client = (Client) session.getAttribute("client");
-                if(client != null){
-                    request.setAttribute("client",client);
+                //On récupère l'identité du client depuis la session
+                Client clientProfil = (Client) session.getAttribute("client");
+                if(clientProfil != null){
+                    request.setAttribute("client",clientProfil);
                     serialisation = new ClientSerialisation();
                     serialisation.serialiser(request,response);
                 } else {
@@ -128,6 +128,22 @@ public class ActionServlet extends HttpServlet {
                 } else {
                     out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement des mediums\"}");
                 }
+                break;
+                
+            case "chargerHistorique":
+                //On récupère l'identité du client depuis la session et on la passe en paramètre de la requête
+                Client clientHistorique = (Client) session.getAttribute("client");
+                request.setAttribute("client",clientHistorique);
+                action = new ActionAffichageHistorique();
+                
+                if(action.executer(request)){
+                    out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement de l'historique\"}");
+                    serialisation = new HistoriqueSerialisation();
+                    serialisation.serialiser(request, response);
+                } else {
+                    out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement de l'historique\"}");
+                }
+                break;
         }
         
         

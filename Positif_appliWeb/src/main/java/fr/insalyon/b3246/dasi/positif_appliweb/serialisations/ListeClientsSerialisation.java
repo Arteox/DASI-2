@@ -36,7 +36,6 @@ public class ListeClientsSerialisation extends Serialisation{
         for (Client client : clients){
         
             JsonObject jsonClient = new JsonObject();
-            client = (Client) request.getAttribute("client");
 
             jsonClient.addProperty("adresse postale", client.getAdressePostale());
             jsonClient.addProperty("animal totem", client.getAnimalTotem());

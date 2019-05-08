@@ -34,7 +34,6 @@ public class ListeEmployesSerialisation extends Serialisation{
         for (Employe employe : employes){
         
             JsonObject jsonEmploye = new JsonObject();
-            employe = (Employe) request.getAttribute("employe");
 
             jsonEmploye.addProperty("disponible", employe.getDisponible());
             jsonEmploye.addProperty("email", employe.getEmail());
