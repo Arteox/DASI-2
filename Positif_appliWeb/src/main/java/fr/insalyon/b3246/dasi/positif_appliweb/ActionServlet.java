@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import dao.JpaUtil;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAffichageHistorique;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChoisirMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
@@ -128,6 +129,18 @@ public class ActionServlet extends HttpServlet {
                     serialisation.serialiser(request, response);
                 } else {
                     out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement des mediums\"}");
+                }
+                break;
+                
+            case "choisirMedium":
+                Client clientVoyance = (Client) session.getAttribute("client");
+                request.setAttribute("client",clientVoyance);
+                action = new ActionChoisirMedium();
+                
+                if (action.executer(request)){
+                    out.println("{\"disponible\": true, \"message\":\"Envoi du SMS au client\"}");
+                } else {
+                    out.println("{\"disponible\": false, \"message\":\"Médium occupé\"}");
                 }
                 break;
                 
