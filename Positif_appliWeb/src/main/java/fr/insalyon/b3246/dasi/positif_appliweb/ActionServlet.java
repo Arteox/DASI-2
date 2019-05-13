@@ -20,6 +20,7 @@ import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAffichageHistorique
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChoisirMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.EmployeSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
 import java.io.IOException;
@@ -92,7 +93,10 @@ public class ActionServlet extends HttpServlet {
                 if(action.executer(request)){
                     Employe employe = Service.trouverEmploye(request.getParameter("login"), request.getParameter("password"));
                     session.setAttribute("employe", employe);
-                    out.println("{\"connexion\": true, \"message\":\"OK\"}");
+                    
+                    //reponse
+                    serialisation = new EmployeSerialisation();
+                    serialisation.serialiser(request,response);
 
                 } else {
                     out.println("{\"connexion\": false, \"message\":\"Erreur de login\"}");

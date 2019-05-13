@@ -8,6 +8,7 @@ package fr.insalyon.b3246.dasi.positif_appliweb.actions;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.Action;
 import javax.servlet.http.HttpServletRequest;
 import metier.modele.Client;
+import metier.modele.DemandeDeVoyance;
 import metier.modele.Employe;
 
 import metier.service.Service;
@@ -29,6 +30,11 @@ public class ActionConnexionEmploye extends Action {
         if (employe == null){
             return false;
         }
+        
+        DemandeDeVoyance demandeVoyance = employe.getVoyanceActuelle();
+        request.setAttribute("voyance", demandeVoyance);
+        
+        request.setAttribute("connexion", true);
         
         return true;
            

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metier.modele.DemandeDeVoyance;
 import metier.modele.Employe;
 
 /**
@@ -24,6 +25,9 @@ public class EmployeSerialisation extends Serialisation {
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         JsonObject jsonContainer = new JsonObject();
+        
+        Boolean connexion = (Boolean) request.getAttribute("connexion");
+        jsonContainer.addProperty("connexion", connexion);
         
         JsonObject jsonEmploye = new JsonObject();
         Employe employe = (Employe) request.getAttribute("employe");
@@ -38,6 +42,13 @@ public class EmployeSerialisation extends Serialisation {
         jsonEmploye.addProperty("prenom", employe.getPrenom());
         
         jsonContainer.add("employe", jsonEmploye);
+        
+        JsonObject jsonVoyance = new JsonObject();
+        DemandeDeVoyance demandeVoyance = (DemandeDeVoyance) request.getAttribute("voyance");
+        if (demandeVoyance != null){
+            jsonVoyance.addProperty("id", demandeVoyance.getId());
+        }
+        jsonContainer.add("voyance", jsonVoyance);
         
         //Formatage et écriture sur la sortie
         PrintWriter out = this.getWriterWithJsonHeader(response);

@@ -29,10 +29,7 @@ public class ActionConnexionClient extends Action {
         if (client == null){
             return false;
         }
-        //Employe employe = Service.trouverEmploye(mail, password);
-        //request.setAttribute("employe", employe);
-        return true;
-           
+        
+        return true;  
     }
-    
 }

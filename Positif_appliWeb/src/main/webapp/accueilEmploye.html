@@ -58,7 +58,12 @@
                     if(response.connexion){
                         console.log("Employé connecté : " + champLogin);
                         // si connexion ok, aller sur la page suivante :
-                        //window.location = "accueilClient.html";
+                        if (response.voyance.id){
+                            window.location = "voyanceEnCoursEmploye.html";
+                        } else {
+                            window.location = "pasDeVoyanceEmploye.html";
+                        }
+                        //window.location = "pasDeVoyanceEmploye.html";
                         $('#message').html('La connexion a fonctionné !');
                     } else {
                         $('#message').html('La connexion a échoué, vos identifiants sont incorrects ou votre compte n\'existe pas');
