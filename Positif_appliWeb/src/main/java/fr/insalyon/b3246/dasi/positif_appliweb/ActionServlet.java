@@ -157,6 +157,10 @@ public class ActionServlet extends HttpServlet {
                     out.println("{\"chargement\": false, \"message\":\"Erreur dans le chargement de l'historique\"}");
                 }
                 break;
+                
+            case "deconnexion":
+                session.invalidate();
+                return;
         }
         
         
