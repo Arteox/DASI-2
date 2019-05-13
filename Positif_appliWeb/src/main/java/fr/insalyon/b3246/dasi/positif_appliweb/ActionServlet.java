@@ -18,11 +18,15 @@ import com.google.gson.JsonObject;
 import dao.JpaUtil;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAffichageHistorique;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerTableauDeBord;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChoisirMedium;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionRafraichirVoyanceEnCours;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.DemandeDeVoyanceSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.EmployeSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.TableauDeBordSerialisation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -162,12 +166,29 @@ public class ActionServlet extends HttpServlet {
                 }
                 break;
                 
+            case "rafraichir":
+                action = new ActionRafraichirVoyanceEnCours();
+               
+                if (action.executer(request)){
+                    serialisation = new DemandeDeVoyanceSerialisation();
+                    serialisation.serialiser(request, response);
+                }
+                break;
+                
+            case "tableauDeBord":
+                action = new ActionChargerTableauDeBord();
+                
+                if(action.executer(request)){
+                    serialisation = new TableauDeBordSerialisation();
+                    serialisation.serialiser(request, response);
+                }
+                break;
+                
             case "deconnexion":
                 session.invalidate();
                 return;
         }
-        
-        
+
         JpaUtil.destroy();
     }
 

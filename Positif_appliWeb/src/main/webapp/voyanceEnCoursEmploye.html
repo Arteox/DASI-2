@@ -57,16 +57,51 @@ and open the template in the editor.
                 });
             }
             
+            function rafraichir() {
+
+                // Message d'information dans la div #message :
+                $('#message').html('Rafraîchissement en cours...');
+
+                // Requête AJAX
+                $.ajax({
+
+                    url: 'ActionServlet', // URL
+                    method: 'POST',         // Méthode
+                    data: {                 // Paramètres
+                        todo: 'rafraichir'
+                    },
+                    dataType: 'json'        // Type de retour attendu
+
+                }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
+
+                    if (response.voyance.id){
+                        window.location = "voyanceEnCoursEmploye.html";
+                    } else {
+                        window.location = "pasDeVoyanceEmploye.html";
+                    }
+                    $('#message').html('La page a été actualisée !');
+
+                }).fail( function (error) { // Appel KO => erreur a gérer
+                    
+                    // Popup avec message d'erreur :
+                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                    // Message d'erreur dans la div #message :
+                    $('#message').html('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+
+                });
+            }
+            
             $(document).ready(function () { 
 
                 console.log('Page chargee => Debut du Script');
                 
                 //Handlers au clic du menu (commun à toutes les pages du menu client)
                 $('#bouton-client').on('click', function () {
-                    window.location = "pagePrincipaleClient.html";
+                    rafraichir();
                 });
                 
                 $('#bouton-tableau').on('click', function () {
+                    window.location = "tableauDeBordEmploye.html";
                 });
                 
                 $('#bouton-deconnexion').on('click', function () {
