@@ -38,7 +38,7 @@ public class TableauDeBordSerialisation extends Serialisation {
             JsonObject jsonEmploye = new JsonObject();
 
             jsonEmploye.addProperty("id", employe.getId());
-            jsonEmploye.addProperty("nombre affectations", employe.getNbAffectations());
+            jsonEmploye.addProperty("nbAffectations", employe.getNbAffectations());
             jsonEmploye.addProperty("nom", employe.getNom());
             jsonEmploye.addProperty("prenom", employe.getPrenom());
 

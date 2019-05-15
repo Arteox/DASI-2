@@ -16,6 +16,9 @@ and open the template in the editor.
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         
+        <!-- Librairie Javascript: CanvasJS -->
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        
     </head>
     <body>
         <h1> Posit'IF </h1>
@@ -27,7 +30,8 @@ and open the template in the editor.
 
         <h2>Tableau de bord </h2>
         <div id="message"></div>
-        
+        <div id="grapheEmployes" style="height: 300px; width: 100%;"></div>
+        <div id="grapheMediums" style="height: 300px; width: 100%;"></div>
         
         <script>
             
@@ -55,6 +59,7 @@ and open the template in the editor.
 
                 });
             }
+         
             
             function rafraichir() {
 
@@ -101,7 +106,54 @@ and open the template in the editor.
                     },
                     dataType: 'json'        // Type de retour attendu
                 }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
-                   console.log("yo les potes");
+                   
+                   //graphe employe par nb de clients
+                    var employesNbClients = [];
+                    for (let i=0; i<response.employes.length; i++){
+                        employesNbClients.push({y:response.employes[i].nbAffectations, label:response.employes[i].prenom});
+                    }
+                    var chartEmploye = new CanvasJS.Chart("grapheEmployes", {
+                        title:{
+                            text: "Nombre de clients par employé"              
+                        },
+                        axisY: {
+                            title: "Nombre de clients"
+                        },
+                        axisX: {
+                            title: "Prénom de l'employé"
+                        },
+                        data: [              
+                            {
+                                type: "bar",
+                                dataPoints: employesNbClients
+                            }
+                            ]
+                        });
+                    chartEmploye.render();
+                    
+                    //graphe mediums par nb d'affectations
+                    var mediumsNbVoyances = [];
+                    for (let i=0; i<response.mediums.length; i++){
+                        mediumsNbVoyances.push({y:response.mediums[i].nbAffectations, label:response.mediums[i].nom});
+                    }
+                    var chartMedium = new CanvasJS.Chart("grapheMediums", {
+                        title:{
+                            text: "Nombre de voyances par médium"              
+                        },
+                        axisY: {
+                            title: "Nombre de voyances"
+                        },
+                        axisX: {
+                            title: "Nom du médium"
+                        },
+                        data: [              
+                            {
+                                type: "bar",
+                                dataPoints: mediumsNbVoyances
+                            }
+                            ]
+                        });
+                    chartMedium.render();
                 }).fail( function (error) { // Appel KO => erreur a gérer
                     
                     // Popup avec message d'erreur :
@@ -119,7 +171,7 @@ and open the template in the editor.
                 chargerTableauDeBord();
                 
                 //Handlers au clic du menu (commun à toutes les pages du menu client)
-                $('#bouton-client').on('click', function () {
+                $('#bouton-client-actuel').on('click', function () {
                     rafraichir();
                 });
                 
@@ -131,10 +183,8 @@ and open the template in the editor.
                     deconnexion();
                     window.location = "index.html";
                 });
-                                
             });
-            
+        
         </script>
-                    
     </body>
 </html>
