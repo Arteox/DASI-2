@@ -23,9 +23,9 @@ public class DemandeDeVoyance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date date_demande;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date date_fin;
     protected Boolean accepte;
     protected String commentaire;
