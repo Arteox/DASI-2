@@ -121,7 +121,6 @@ public class ActionServlet extends HttpServlet {
                 //On récupère l'identité du client depuis la session
                 Client clientProfil = (Client) session.getAttribute("client");
                 if (clientProfil != null){
-                    request.setAttribute("client",clientProfil);
                     serialisation = new ClientSerialisation();
                     serialisation.serialiser(request,response);
                 } else {
@@ -141,8 +140,6 @@ public class ActionServlet extends HttpServlet {
                 break;
                 
             case "choisirMedium":
-                Client clientVoyance = (Client) session.getAttribute("client");
-                request.setAttribute("client",clientVoyance);
                 action = new ActionChoisirMedium();
                 
                 if (action.executer(request)){

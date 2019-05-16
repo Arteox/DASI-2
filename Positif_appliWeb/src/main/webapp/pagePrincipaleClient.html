@@ -12,22 +12,32 @@ and open the template in the editor.
         
         <style>
             /* Feuille de Style CSS (dans la page) */
-            .medium { border: 2px solid blanchedalmond }
             .bouton-choix-medium { padding: 3px 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
-            #message { color : red}
-            
+            #message { color : red; font-family: verdana; text-align: center;}
+            #barre-menu {width: 100%; display: inline-block}
+            #boutons{ display: inline-block; border : 2px solid black;float: right;}
+            .bouton-menu { background-color: white; color: black; border: none; font-size: 1.5vw;}
+            #titre {background-color: black; color: white; border: none; font-size: 2.5vw;}
+            h2 {text-align: center; font-size: 2vw;}
+            #conteneur-medium{ border: 2px solid black; overflow-y: scroll; height: 37vw;}
+            .nom-medium{ font-weight: bold;}
+            .medium{margin:1vw;}
+            .boite-image{ width: 4vw; height: 4vw; border: 2px solid black; float: left; margin-right: 1vw;}
+            .image {max-width: 100%; max-height: 100%}
         </style>
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         
     </head>
     <body>
-        <h1> Posit'IF </h1>
-        <div id="bouttons">
-            <button id="bouton-medium">Consulter médium</button>
-            <button id="bouton-historique">Historique</button>
-            <button id="bouton-profil">Profil Astrologique</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+        <div id="barre-menu">
+            <button id="titre"> Posit'IF </button>
+            <div id="boutons">
+                <button class="bouton-menu" id="bouton-medium">Consulter médium</button>
+                <button class="bouton-menu" id="bouton-historique">Historique</button>
+                <button class="bouton-menu" id="bouton-profil">Profil Astrologique</button>
+                <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
+            </div>
         </div>
 
         <h2>Choisissez votre médium et découvrez votre avenir </h2>
@@ -51,20 +61,23 @@ and open the template in the editor.
                     if(response.mediums){
                         console.log("Chargement des médiums a été effectué");
                         for(let i = 0; i<response.mediums.length ; i++){
-                            let ligneMedium = $('<div />').addClass("medium").html(" Nom : " + response.mediums[i].nom + "<br/> Description :" + response.mediums[i].descriptif)
-                                    .append($('<button />').addClass("bouton-choix-medium").attr("id",response.mediums[i].id).html("Choisir"));
+                            let ligneMedium = $('<div />').addClass("medium").append($('<div />').addClass("boite-image")
+                                    .append($("<img />").attr("src","http://image.noelshack.com/fichiers/2014/37/1410350619-kirby-hi.png").addClass("image")))
+                                    .append($('<div />').addClass("nom-medium").html(response.mediums[i].nom));
                             if(response.mediums[i].type === "Astrologue"){
-                                ligneMedium.append($('<div />').html("Astrologue, formation : " + response.mediums[i].formation + ", promo : " + response.mediums[i].promotion));
+                                ligneMedium.append($('<div />').html(" ⎔ Astrologue ☐ Formation : " + response.mediums[i].formation + " △ Promo : " + response.mediums[i].promotion));
                             } else if (response.mediums[i].type === "Tarologue"){
-                                ligneMedium.append($('<div />').html("Tarologue"));
+                                ligneMedium.append($('<div />').html(" ⎔ Tarologue"));
                             } else if (response.mediums[i].type === "Voyant"){
-                                ligneMedium.append($('<div />').html("Voyant, spécialité : " + response.mediums[i].specialite));
+                                ligneMedium.append($('<div />').html(" ⎔ Voyant ☐ Spécialité : " + response.mediums[i].specialite));
                             }
+                            ligneMedium.append($("<div />").html(response.mediums[i].descriptif))
+                                    .append($('<button />').addClass("bouton-choix-medium").attr("id",response.mediums[i].id).html("Choisir"));;
                              $("#conteneur-medium").append(ligneMedium);
                         }
                         $(".bouton-choix-medium").click(function (){
                             choisirMedium($(this).attr("id"));
-                        })
+                        });
                         console.log("Préparation des boutons terminée");
                     }
                 }).fail( function (error) { // Appel KO => erreur a gérer

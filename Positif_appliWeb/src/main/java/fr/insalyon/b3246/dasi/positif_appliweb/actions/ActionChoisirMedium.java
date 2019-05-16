@@ -7,6 +7,7 @@ package fr.insalyon.b3246.dasi.positif_appliweb.actions;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import metier.modele.Client;
 import metier.modele.Medium;
 import metier.service.Service;
@@ -21,9 +22,12 @@ public class ActionChoisirMedium extends Action {
     @Override
     public boolean executer(HttpServletRequest request) {
         
-        String numeroMedium = request.getParameter("numMedium");
+        HttpSession session = request.getSession(false);
         
-        Client client = (Client) request.getAttribute("client");
+        Client client = (Client) session.getAttribute("client");
+        
+        String numeroMedium = request.getParameter("numMedium");
+
         Medium medium = Service.trouverMedium(Long.parseLong(numeroMedium));
         
         client.getAdressePostale();

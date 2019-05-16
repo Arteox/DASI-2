@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import metier.modele.Client;
 import org.apache.http.HttpRequest;
 
@@ -29,7 +30,9 @@ public class ClientSerialisation extends Serialisation {
         JsonObject jsonContainer = new JsonObject();
         
         JsonObject jsonClient = new JsonObject();
-        Client client = (Client) request.getAttribute("client");
+        HttpSession session = request.getSession(false);
+        
+        Client client = (Client) session.getAttribute("client");
         
         jsonClient.addProperty("adresse-postale", client.getAdressePostale());
         jsonClient.addProperty("totem", client.getAnimalTotem());

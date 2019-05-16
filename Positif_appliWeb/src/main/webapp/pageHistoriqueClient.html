@@ -12,26 +12,35 @@ and open the template in the editor.
         
         <style>
             /* Feuille de Style CSS (dans la page) */
-            
+            #barre-menu {width: 100%; display: inline-block}
+            #boutons{ display: inline-block; border : 2px solid black;float: right;}
+            .bouton-menu { background-color: white; color: black; border: none; font-size: 1.5vw;}
+            #titre {background-color: black; color: white; border: none; font-size: 2.5vw;}
+            h2 {text-align: center; font-size: 2vw;}
+            #conteneur-historique{ border: 2px solid black; overflow-y: scroll; height: 37vw;}
+            .nom-medium{ font-weight: bold;}
+            .medium{margin:1vw;}
+            .boite-image{ width: 4vw; height: 4vw; border: 2px solid black; float: left; margin-right: 1vw;}
+            .image {max-width: 100%; max-height: 100%}
         </style>
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         
     </head>
     <body>
-        <h1> Posit'IF </h1>
-        <div id="bouttons">
-            <button id="bouton-medium">Consulter médium</button>
-            <button id="bouton-historique">Historique</button>
-            <button id="bouton-profil">Profil Astrologique</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+        <button id="titre"> Posit'IF </button>
+        <div id="boutons">
+            <button class="bouton-menu" id="bouton-medium">Consulter médium</button>
+            <button class="bouton-menu" id="bouton-historique">Historique</button>
+            <button class="bouton-menu" id="bouton-profil">Profil Astrologique</button>
+            <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
         </div>
         
         <h2> Historique des demandes de voyance </h2>
         <div>
-            <div id="historique-client"></div>
-            <div class="valeur" id="date-demande-debut"></div>
-            <div class="valeur" id="date-demande-fin"></div>
+            <div id="conteneur-historique">
+            </div>
+
         </div>
         <script>
             
@@ -48,19 +57,24 @@ and open the template in the editor.
                 }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
                     if (response.voyances){
                         for (let i in response.voyances){
-                            let demandeDebut =  $('<div />').addClass("#date-demande-debut").html(response.voyances[i].dateDemande);
-                            $("#historique-client").append(demandeDebut);
-                            let mediumNom =  $('<div />').addClass("#medium-nom").html(response.voyances[i].mediumNom);
-                            $("#historique-client").append(mediumNom);
-                            let demandeAcceptee;
-                            if (response.voyances[i].accepte == true){
-                                demandeAcceptee =  $('<div />').addClass("#accepte").html("Demande acceptée");
+                            let demandeVoyance =  $('<div />').addClass('medium').append($('<div />').addClass("boite-image")
+                                    .append($("<img />").attr("src","http://image.noelshack.com/fichiers/2014/37/1410350619-kirby-hi.png").addClass("image")))
+                                    .append($('<div />').addClass("date-demande-debut").html(response.voyances[i].dateDemande));
+                            let mediumNom =  $('<div />').addClass("nom-medium").html(response.voyances[i].mediumNom);
+                            demandeVoyance.append(mediumNom);
+                            let demandeStatut;  
+                            let demandeHoraire;
+                            if (response.voyances[i].accepte === true){
+                                demandeStatut =  $('<div />').addClass("accepte").html("Demande acceptée");
+                                demandeHoraire = $('<div />').addClass("accepte").html(" ✓ " + response.voyances[i].dateFin);
                             }
                             else {
-                                demandeAcceptee =  $('<div />').addClass("#accepte").html("Medium indisponible");
+                                demandeStatut =  $('<div />').addClass("accepte").html(" ✘ Medium indisponible");
+                                demandeHoraire = $('<br/>');
                             }
-                            $("#historique-client").append(demandeAcceptee);
-                            $("#historique-client").append("<br/>");
+                            demandeVoyance.append(demandeStatut);
+                            demandeVoyance.append(demandeHoraire);
+                            $("#conteneur-historique").append(demandeVoyance);
                             
                         }
                     }
