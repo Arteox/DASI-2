@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dao.JpaUtil;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAffichageHistorique;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAfficherVoyanceEnCours;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerTableauDeBord;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChoisirMedium;
@@ -26,6 +27,7 @@ import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.DemandeDeVoyanceSe
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.EmployeSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.VoyanceEnCoursSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.TableauDeBordSerialisation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -117,7 +119,7 @@ public class ActionServlet extends HttpServlet {
                 }
                 break;
                 
-            case "profil":
+            case "profilClient":
                 //On récupère l'identité du client depuis la session
                 Client clientProfil = (Client) session.getAttribute("client");
                 if (clientProfil != null){
@@ -178,6 +180,17 @@ public class ActionServlet extends HttpServlet {
                 if(action.executer(request)){
                     serialisation = new TableauDeBordSerialisation();
                     serialisation.serialiser(request, response);
+                }
+                break;
+                
+            case "voyanceEnCours" :
+                action = new ActionAfficherVoyanceEnCours();
+                
+                if (action.executer(request)){
+                    serialisation = new VoyanceEnCoursSerialisation();
+                    serialisation.serialiser(request, response);
+                } else {
+                    out.println("{\"voyanceEnCours\": false, \"message\":\"Erreur dans le chargement de la voyance en cours\"}");
                 }
                 break;
                 
