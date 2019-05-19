@@ -1,25 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html class="accueil">
     <head>
         <title>Accueil - Posit'IF</title>
         <meta charset="UTF-8">
 
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            #message { margin: 25px; padding: 10px; border-radius: 10px; border: 2px solid violet; color: white;  text-align: center; }
-            button.joli-bouton { padding: 3px 10px; margin-top: 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
-            h1 { width: 100%; text-align: center; color: blueviolet; font-size: 5vw;}
-            html { background-image: url("https://www.voyancehorizon.com/upload/blog/article124_img1.jpg"); background-size: cover}
-            #box-connexion {margin-top: 10%; margin-left: 40%; margin-right: 40%; background-color: white; border-radius: 5px; border: 2px solid black; text-align: center; padding-bottom: 20px;}
-              
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <h1>Posit'IF</h1>
-        <div id="box-connexion">
+        <div class="box-connexion">
             <h3>Accès employés</h3>
             <div>
                 Identifiant : <input type="text" id="champ-login" name="login" placeholder="votre identifiant" /><br>
@@ -30,7 +21,7 @@
 
         
          
-        <div id="message">...</div>
+        <div class="message-accueil">...</div>
         
         <script>
 

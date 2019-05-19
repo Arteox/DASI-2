@@ -9,22 +9,7 @@ and open the template in the editor.
         <title>Profil astrologique - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            #barre-menu {width: 100%; display: inline-block}
-            #boutons{ display: inline-block; border : 2px solid black;float: right;}
-            .bouton-menu { background-color: white; color: black; border: none; font-size: 1.5vw;}
-            #titre {background-color: black; color: white; border: none; font-size: 2.5vw;}
-            h2 {text-align: center; font-size: 2vw;}
-            #conteneur-profil{ display: inline-block; height: 37vw; margin-top: 1vw; margin-left: 9.5vw; margin-right: 9.5vw; width: 79vw; font-size: 1.2vw;}
-            #boite-zodiaque{ float:left; width: 50%; text-align: center;}
-            #boite-chinois{ float:right; width: 50%; text-align: center;}
-            #boite-bohneur{ float:left; width: 50%; text-align: center;}
-            #boite-totem{ float:right; width: 50%; text-align: center;}
-            .image-profil {max-width: 100%; max-height: 100%}
-            .boite-image{ height: 15vw; width: 15vw; border: 2px solid black; display: inline-block;}
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -42,21 +27,22 @@ and open the template in the editor.
         <h2>Profil astrologique </h2>
         <div id="conteneur-profil">
             <div id="boite-zodiaque">Signe du Zodiaque : <div class="valeur" id="signe-zodiaque"></div>
-                <div class="boite-image">
+                <div class="boite-image-profil">
                     <img class="image-profil" src="https://jeretiens.net/wp-content/uploads/2014/07/Signes_astrologiques_du_zodiaque-1024x1024.png"/>
                 </div>
             </div>
             <div id="boite-chinois">Signe Chinois : <div class="valeur" id="signe-chinois"></div>
-                <div class="boite-image">
+                <div class="boite-image-profil">
                     <img class="image-profil" src="https://anglaisvideo.com/wp-content/uploads/2015/01/signe-zodiac-chinois.jpg"/>
                 </div>
             </div>
             <div id="boite-bohneur">Couleur porte-bohneur : <div class="valeur" id="couleur-porte-bohneur"></div>
-                <div class="boite-image">
+                <div class="boite-image-profil">
                     <img class="image-profil" src="https://cdn-images-1.medium.com/max/1600/0*NzDpBJnxFL3HhO3k.png"/>
                 </div>
             </div>
-            <div id="boite-totem">Animal totem : <div class="valeur" id="animal-totem"></div><div class="boite-image">
+            <div id="boite-totem">Animal totem : <div class="valeur" id="animal-totem"></div>
+                <div class="boite-image-profil">
                     <img class="image-profil" src="https://i.pinimg.com/originals/c9/21/d5/c921d5a51f123937ef7788f965eb38aa.jpg"/>
                 </div>
             </div>

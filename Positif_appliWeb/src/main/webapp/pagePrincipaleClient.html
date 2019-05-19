@@ -9,22 +9,8 @@ and open the template in the editor.
         <title>Page principale - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            .bouton-choix-medium { padding: 3px 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
-            #message { color : red; font-family: verdana; text-align: center;}
-            #barre-menu {width: 100%; display: inline-block}
-            #boutons{ display: inline-block; border : 2px solid black;float: right;}
-            .bouton-menu { background-color: white; color: black; border: none; font-size: 1.5vw;}
-            #titre {background-color: black; color: white; border: none; font-size: 2.5vw;}
-            h2 {text-align: center; font-size: 2vw;}
-            #conteneur-medium{ border: 2px solid black; overflow-y: scroll; height: 37vw;}
-            .nom-medium{ font-weight: bold;}
-            .medium{margin:1vw;}
-            .boite-image{ width: 4vw; height: 4vw; border: 2px solid black; float: left; margin-right: 1vw;}
-            .image {max-width: 100%; max-height: 100%}
-        </style>
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         
@@ -41,7 +27,7 @@ and open the template in the editor.
         </div>
 
         <h2>Choisissez votre médium et découvrez votre avenir </h2>
-        <div id="message"></div>
+        <div class="message"></div>
         
         <div id="conteneur-medium">
             
