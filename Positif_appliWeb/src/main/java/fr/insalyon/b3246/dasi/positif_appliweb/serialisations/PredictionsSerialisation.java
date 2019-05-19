@@ -10,27 +10,26 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import metier.modele.DemandeDeVoyance;
 
 /**
  *
- * @author bpauletto
+ * @author Louis Ung
  */
-public class DemandeDeVoyanceSerialisation extends Serialisation {
+public class PredictionsSerialisation extends Serialisation {
 
     @Override
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         JsonObject jsonContainer = new JsonObject();
         
-        JsonObject jsonVoyance = new JsonObject();
-        DemandeDeVoyance demandeVoyance = (DemandeDeVoyance) request.getAttribute("voyance");
-        if (demandeVoyance != null){
-            jsonVoyance.addProperty("id", demandeVoyance.getId());
-            jsonVoyance.addProperty("etape", demandeVoyance.getEtape());
-        }
-        jsonContainer.add("voyance", jsonVoyance);
+        List<String> predictions = (List<String>) request.getAttribute("predictions");
+        JsonObject jsonPredictions = new JsonObject();
+        jsonPredictions.addProperty("amour", predictions.get(0));
+        jsonPredictions.addProperty("sante", predictions.get(1));
+        jsonPredictions.addProperty("travail", predictions.get(2));
+        jsonContainer.add("predictions", jsonPredictions);
         
         //Formatage et écriture sur la sortie
         PrintWriter out = this.getWriterWithJsonHeader(response);

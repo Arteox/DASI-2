@@ -21,12 +21,17 @@ import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionAfficherVoyanceEnCo
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerMedium;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChargerTableauDeBord;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionChoisirMedium;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionCommencerVoyance;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionGenererPredictions;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionRafraichirVoyanceEnCours;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionTerminerVoyance;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionValiderCRVoyance;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.DemandeDeVoyanceSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.EmployeSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.PredictionsSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.VoyanceEnCoursSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.TableauDeBordSerialisation;
 import java.io.IOException;
@@ -191,6 +196,40 @@ public class ActionServlet extends HttpServlet {
                     serialisation.serialiser(request, response);
                 } else {
                     out.println("{\"voyanceEnCours\": false, \"message\":\"Erreur dans le chargement de la voyance en cours\"}");
+                }
+                break;
+                
+            case "genererPredictions":
+                action = new ActionGenererPredictions();
+                
+                if (action.executer(request)){
+                    serialisation = new PredictionsSerialisation();
+                    serialisation.serialiser(request, response);
+                }
+                break;
+                
+            case "commencerVoyance":
+                action = new ActionCommencerVoyance();
+                
+                if (action.executer(request)){
+                    serialisation = new DemandeDeVoyanceSerialisation();
+                    serialisation.serialiser(request, response);
+                }
+                break;
+                
+            case "terminerVoyance":
+                action = new ActionTerminerVoyance();
+                
+                if (action.executer(request)){
+                    serialisation = new DemandeDeVoyanceSerialisation();
+                    serialisation.serialiser(request, response);
+                }
+                break;
+                
+            case "validerCRVoyance":
+                action = new ActionValiderCRVoyance();
+                if (action.executer(request)){
+                    out.println("{\"validationVoyance\": true, \"message\":\"Voyance validée\"}");
                 }
                 break;
                 
