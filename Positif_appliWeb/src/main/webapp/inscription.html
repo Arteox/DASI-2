@@ -4,17 +4,17 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html class="accueil">
     <head>
         <title>Inscription</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" type="text/css" href="css/style.css"> 
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
     </head>
-    <body>
-        <h1>Posit'IF</h1>
+    <body id="corps-inscription">
             <div>
                 <p> Civilité 
                     <input type="radio" id="radio-M" name="radioS" value="M"/>
@@ -28,73 +28,77 @@ and open the template in the editor.
             <div>
                 <p>
                     Nom 
-                    <input type="text" id="nom" placeholder="Votre nom..." required />
+                    <input class="champ-inscription" type="text" id="nom" placeholder="Votre nom..." required />
                 </p>
             </div>
             <div>
                 <p>
                     Prénom 
-                    <input type="text" id="prenom" placeholder="Votre prenom..." required />
+                    <input class="champ-inscription" type="text" id="prenom" placeholder="Votre prenom..." required />
                 </p>
             </div>
             <div>
                 <p>
                     Naissance 
-                    <input type="date" id="naissance" required />
+                    <input class="champ-inscription" type="date" id="naissance" required />
                 </p>
             </div>
+            <br/>
             <div>
                 <p>
                     Adresse 
-                    <input type="text" id="adresse" placeholder="13 rue ..." required />
+                    <input class="champ-inscription" type="text" id="adresse" placeholder="13 rue ..." required />
                 </p>
             </div>
             <div>
                 <p>
                     Ville 
-                    <input type="text" id="ville" placeholder="Villeurbanne.." required />
+                    <input class="champ-inscription" type="text" id="ville" placeholder="Villeurbanne.." required />
                 </p>
             </div>
             <div>
                 <p>
                     Code postal 
-                    <input type="number" id="code-postal" min="0" placeholder="69100" required />
+                    <input class="champ-inscription" type="number" id="code-postal" min="0" placeholder="69100" required />
                 </p>
             </div>
+            <br/>
             <div>
                 <p>
                     Téléphone 
-                    <input type="tel" id="telephone" placeholder="06..." required />
+                    <input class="champ-inscription" type="tel" id="telephone" placeholder="06..." required />
                 </p>
             </div>
+            <br/>
             <div>
                 <p>
                     Email 
-                    <input type="email" id="mail" placeholder="baptiste@louis.com" required />
+                    <input class="champ-inscription" type="email" id="mail" placeholder="baptiste@louis.com" required />
                 </p>
             </div>
             <div>
                 <p>
                     Mdp
-                    <input type="password" id="mdp" pattern=".{3,}" required />
+                    <input class="champ-inscription" type="password" id="mdp" pattern=".{3,}" required />
                 </p>
             </div>
             <div>
                 <p>
                     ConfirmerMdp 
-                    <input type="password" id="confirmer-mdp" required />
+                    <input class="champ-inscription" type="password" id="confirmer-mdp" required />
                 </p>
             </div>
-            <div>
+            <div id="boite-validation">
+                <div id="bloc-inscription">
+                    <p>
+                        Accepter CGU
+                        <input type="checkbox" id="cgu" required checked/>
+                    </p>
+               
                 <p>
-                    Accepter CGU
-                    <input type="checkbox" id="cgu" required checked/>
+                    <button class="joli-bouton" id="bouton-inscription" >Valider</button> 
                 </p>
-            </div>
-            <div>
-                <p>
-                    <button id="bouton-inscription">Valider</button> 
-                </p>
+                </div>
             </div>
 
         <div id="message-erreur"></div>

@@ -10,38 +10,36 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            #message { color : red}
-            
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
         
     </head>
     <body>
-        <h1> Posit'IF </h1>
+        <button id="titre"> Posit'IF </button>
         <div id="boutons">
-            <button id="bouton-client-actuel">Client actuel</button>
-            <button id="bouton-tableau">Tableau de bord</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+            <button class="bouton-menu" id="bouton-client-actuel">Client actuel</button>
+            <button class="bouton-menu" id="bouton-tableau">Tableau de bord</button>
+            <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
         </div>
+
 
         <h3>
             Compte-rendu de la séance de voyance
         </h3>
-        
-        <span>Heure de fin</span>
-        <input type="time" id="heure-fin" min="01:00" max="12:59">
-        
-        <div>
-            Commentaire
-            <textarea rows="4" cols="50" id="commentaire"></textarea>
+        <div id="conteneur-compte-rendu">
+            <span>Heure de fin</span>
+            <input type="time" id="heure-fin" min="01:00" max="12:59">
+            <div>
+                Commentaire
+                <textarea rows="4" cols="50" id="commentaire"></textarea>
+            </div>
+            
+
+            <button class="joli-bouton" id="bouton-valider">Valider</button>
+            <div id="message"></div>
         </div>
-        
-        <button id="bouton-valider">Valider</button>
-        <div id="message"></div>
-        
         <script>
             
             function deconnexion() {
@@ -129,7 +127,7 @@ and open the template in the editor.
             $(document).ready(function () { 
 
                 console.log('Page chargee => Debut du Script');
-                
+                //verifierSession();
                 $('#bouton-valider').on('click', function () {
                     validerCRVoyance();
                 });

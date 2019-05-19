@@ -9,23 +9,23 @@ and open the template in the editor.
         <title>Tableau de bord - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
         
         <!-- Librairie Javascript: CanvasJS -->
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         
+        
     </head>
     <body>
-        <h1> Posit'IF </h1>
+        <button id="titre"> Posit'IF </button>
         <div id="boutons">
-            <button id="bouton-client-actuel">Client actuel</button>
-            <button id="bouton-tableau">Tableau de bord</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+            <button class="bouton-menu" id="bouton-client-actuel">Client actuel</button>
+            <button class="bouton-menu" id="bouton-tableau">Tableau de bord</button>
+            <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
         </div>
 
         <h2>Tableau de bord </h2>
@@ -108,11 +108,11 @@ and open the template in the editor.
                 }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
                    
                    //graphe employe par nb de clients
-                    var employesNbClients = [];
+                    let employesNbClients = [];
                     for (let i=0; i<response.employes.length; i++){
                         employesNbClients.push({y:response.employes[i].nbAffectations, label:response.employes[i].prenom});
                     }
-                    var chartEmploye = new CanvasJS.Chart("grapheEmployes", {
+                    let chartEmploye = new CanvasJS.Chart("grapheEmployes", {
                         title:{
                             text: "Nombre de clients par employé"              
                         },
@@ -132,11 +132,11 @@ and open the template in the editor.
                     chartEmploye.render();
                     
                     //graphe mediums par nb d'affectations
-                    var mediumsNbVoyances = [];
+                    let mediumsNbVoyances = [];
                     for (let i=0; i<response.mediums.length; i++){
                         mediumsNbVoyances.push({y:response.mediums[i].nbAffectations, label:response.mediums[i].nom});
                     }
-                    var chartMedium = new CanvasJS.Chart("grapheMediums", {
+                    let chartMedium = new CanvasJS.Chart("grapheMediums", {
                         title:{
                             text: "Nombre de voyances par médium"              
                         },
@@ -155,9 +155,6 @@ and open the template in the editor.
                         });
                     chartMedium.render();
                 }).fail( function (error) { // Appel KO => erreur a gérer
-                    
-                    // Popup avec message d'erreur :
-                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
                     // Message d'erreur dans la div #message :
                     $('#message').html('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
 
@@ -167,7 +164,7 @@ and open the template in the editor.
             $(document).ready(function () { 
 
                 console.log('Page chargee => Debut du Script');
-                
+                //verifierSession();
                 chargerTableauDeBord();
                 
                 //Handlers au clic du menu (commun à toutes les pages du menu client)

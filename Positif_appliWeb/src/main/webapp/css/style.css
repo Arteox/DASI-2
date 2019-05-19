@@ -20,6 +20,7 @@ button.joli-bouton { padding: 3px 10px; margin-top: 10px; border-radius: 5px; bo
 h1 { width: 100%; text-align: center; color: blueviolet; font-size: 5vw;}
 html.accueil { background-image: url("https://www.voyancehorizon.com/upload/blog/article124_img1.jpg"); background-size: cover;}
 .box-connexion {margin-top: 10%; margin-left: 40%; margin-right: 40%; background-color: white; border-radius: 5px; border: 2px solid black; text-align: center; padding-bottom: 20px;}
+#box-inscription {text-align: center;}
 
 /* Menu */
 
@@ -29,17 +30,25 @@ html.accueil { background-image: url("https://www.voyancehorizon.com/upload/blog
 
 #titre {background-color: black; color: white; border: none; font-size: 2.5vw;}
 h2 {text-align: center; font-size: 2vw;}
+h3 {text-align: center; font-size: 1.4vw;}
 
 /* Pages Web */
 
 /*Partie Client */
+#titre-inscription{color:white;}
+#corps-inscription{color:white;font-size: 1vw; margin: 2vw;}
+#boite-validation{width: 100%}
+#bloc-inscription{float:right; margin-right: 10vw;}
+#bouton-inscription{width: 4vw; height:2vw; margin-left: 1.5vw;}
+.champ-inscription{position: fixed; left: 10vw;}
+
 #conteneur-medium{ border: 2px solid black; overflow-y: scroll; height: 37vw;}
 .nom-medium{ font-weight: bold;}
 .medium{margin:1vw;}
-.boite-image{ width: 4vw; height: 4vw; border: 2px solid black; float: left; margin-right: 1vw;}
+.boite-image{ width: 4.5vw; height: 4.5vw; border: 2px solid black; float: left; margin-right: 1vw;}
 .image {max-width: 100%; max-height: 100%}
 .bouton-choix-medium { padding: 3px 10px; border-radius: 5px; border-width: 3px; cursor: pointer; }
-.message { color : red; font-family: verdana; text-align: center;}
+#message { color : red; font-family: verdana; text-align: center;}
 
 #conteneur-historique{ border: 2px solid black; overflow-y: scroll; height: 37vw;}
 
@@ -52,3 +61,22 @@ h2 {text-align: center; font-size: 2vw;}
 .boite-image-profil{ height: 15vw; width: 15vw; border: 2px solid black; display: inline-block;}
 
 /* Partie Employé */
+
+#conteneur-message{text-align: center; margin-top: 10vw}
+#message-pas-client {text-align: center; font-size: 1.5vw}
+
+#medium-incarne{margin-left: 30vw;}
+
+#conteneur-client{ width: 90%; margin-left: 5vw; margin-right: 5vw; display: inline-block;}
+#infos-client {width: 40%; padding : 0.75vw 1.5vw 0.75vw;  border: 2px solid black; float: left; font-size: 1vw;}
+#signes-client{width: 40%; padding : 0.75vw 1.5vw 0.75vw; border: 2px solid black; float: right; font-size: 1vw;}
+
+#boutons-gestion-voyance{ text-align: center; margin-top: 2vw; margin-bottom: 2vw;}
+#bouton-commencer{display: inline-block; margin-right: 15%;}
+#bouton-terminer{display: inline-block; margin-left: 15%;}
+#conteneur-prediction{border: 2px solid black; overflow: auto}
+#boite-bouton-prediction{text-align: center;}
+#resultat-prediction{text-align: center; width: 100%;}
+.prediction{width: 30%;height: 80%; float:left; margin: 1vw 1.5vw 1vw;}
+
+#conteneur-compte-rendu{text-align: center;}

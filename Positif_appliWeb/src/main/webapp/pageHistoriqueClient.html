@@ -13,6 +13,7 @@ and open the template in the editor.
         
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
         
     </head>
     <body>
@@ -49,11 +50,11 @@ and open the template in the editor.
                             let demandeStatut;  
                             let demandeHoraire;
                             if (response.voyances[i].accepte === true){
-                                demandeStatut =  $('<div />').addClass("accepte").html("Demande acceptée");
-                                demandeHoraire = $('<div />').addClass("accepte").html(" ✓ " + response.voyances[i].dateFin);
+                                demandeStatut =  $('<div />').addClass("accepte").html(" ✓ Demande acceptée");
+                                demandeHoraire = $('<div />').addClass("accepte").html(" Fin échange " + response.voyances[i].dateFin);
                             }
                             else {
-                                demandeStatut =  $('<div />').addClass("accepte").html(" ✘ Medium indisponible");
+                                demandeStatut =  $('<div />').addClass("refuse").html(" ✘ Medium indisponible");
                                 demandeHoraire = $('<br/>');
                             }
                             demandeVoyance.append(demandeStatut);
@@ -63,8 +64,9 @@ and open the template in the editor.
                         }
                     }
                 }).fail( function (error) { // Appel KO => erreur a gérer
-                    // Popup avec message d'erreur :
-                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                    // Message d'erreur dans la console :
+                    console.log('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+
                 });
             }
             
@@ -96,7 +98,7 @@ and open the template in the editor.
             $(document).ready(function () {
 
                 console.log('Page chargee => Debut du Script');
-
+                //verifierSession();
                 chargementHistorique();
                 
                 //Handlers au clic du menu (commun à toutes les pages du menu client)

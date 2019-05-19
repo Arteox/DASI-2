@@ -9,30 +9,26 @@ and open the template in the editor.
         <title>Page principale - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            #message { color : red}
-            
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
         
     </head>
     <body>
-        <h1> Posit'IF </h1>
+        <button id="titre"> Posit'IF </button>
         <div id="boutons">
-            <button id="bouton-client-actuel">Client actuel</button>
-            <button id="bouton-tableau">Tableau de bord</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+            <button class="bouton-menu" id="bouton-client-actuel">Client actuel</button>
+            <button class="bouton-menu" id="bouton-tableau">Tableau de bord</button>
+            <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
         </div>
-
-        <h3>
-            Vous n'avez aucun client assigné actuellement...
-            Cliquez sur le bouton rafraîchir dès que vous aurez reçu un SMS
-        </h3>
-        <button id="bouton-rafraichir">Rafraîchir</button>
-        
+        <div id="conteneur-message">
+            <h3 id="message-pas-client">
+                Aucun client ne vous est actuellement assigné ...<br/>
+                Cliquez sur le bouton rafraîchir dès que vous aurez reçu un SMS
+            </h3>
+            <button class="joli-bouton" id="bouton-rafraichir">Rafraîchir</button>
+        </div>
         <div id="message"></div>
         
         <script>
@@ -50,8 +46,8 @@ and open the template in the editor.
                         todo: 'deconnexion'
                     },
                     dataType: 'json'        // Type de retour attendu
-                }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
-
+                }).done( function () {  // Appel OK => "response" contient le resultat JSON
+                   //La déconnexion s'est bien passée
                 }).fail( function (error) { // Appel KO => erreur a gérer
                     
                     // Popup avec message d'erreur :
@@ -99,7 +95,7 @@ and open the template in the editor.
             $(document).ready(function () { 
 
                 console.log('Page chargee => Debut du Script');
-                
+                //verifierSession();
                 //Handlers au clic du menu (commun à toutes les pages du menu client)
                 $('#bouton-client-actuel').on('click', function () {
                     rafraichir();

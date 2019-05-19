@@ -13,6 +13,7 @@ and open the template in the editor.
         
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
     </head>
     <body>
         
@@ -68,8 +69,9 @@ and open the template in the editor.
                         $("#animal-totem").html(response.client.totem);
                     }
                 }).fail( function (error) { // Appel KO => erreur a gérer
-                    // Popup avec message d'erreur :
-                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+                    // Message d'erreur dans la console :
+                    console.log('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
+
                 });
         }
         
@@ -101,7 +103,7 @@ and open the template in the editor.
         $(document).ready(function () {
 
                 console.log('Page chargee => Debut du Script');
-
+                //verifierSession();
                 chargementInfo();
                 
                 //Handlers au clic du menu (commun à toutes les pages du menu client)

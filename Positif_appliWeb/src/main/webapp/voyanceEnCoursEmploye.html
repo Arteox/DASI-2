@@ -9,58 +9,65 @@ and open the template in the editor.
         <title>Page principale - Posit'IF</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <style>
-            /* Feuille de Style CSS (dans la page) */
-            #message { color : red}
-            
-        </style>
+         <link rel="stylesheet" type="text/css" href="css/style.css">
+
         <!-- Librairie Javascript: jQuery (v3.3.1) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/verifSession.js"> </script>
         
     </head>
     <body>
-        <h1> Posit'IF </h1>
+        <button id="titre"> Posit'IF </button>
         <div id="boutons">
-            <button id="bouton-client-actuel">Client actuel</button>
-            <button id="bouton-tableau">Tableau de bord</button>
-            <button id="bouton-deconnexion">Déconnexion</button>
+            <button class="bouton-menu" id="bouton-client-actuel">Client actuel</button>
+            <button class="bouton-menu" id="bouton-tableau">Tableau de bord</button>
+            <button class="bouton-menu" id="bouton-deconnexion">Déconnexion</button>
         </div>
 
-        <h2>Vous êtes assigné à un client, au boulot ! </h2>
         <div id="message"></div>
         
         <h3>Vous incarnez...</h3>
-        <div id="profil-medium-nom"></div>
-        <div id="profil-medium-type"></div>
-        <div id="profil-medium-descriptif"></div>
-        
-        <h3>Votre profil</h3>
-        <div>
-            <div id="profil-client-civilite"></div>
-            <div id="profil-client-nom"></div>
-            <div id="profil-client-prenom"></div>
-            <div id="profil-client-naissance"></div>
+        <div id="medium-incarne">
+            <div class="boite-image">
+                <img src="http://image.noelshack.com/fichiers/2014/37/1410350619-kirby-hi.png" class="image">
+            </div>
+            <div class="nom-medium" id="profil-medium-nom"></div>
+            <div id="profil-medium-type"></div>
+            <div id="profil-medium-descriptif"></div>
         </div>
-        <div>
-            <div id="profil-client-signe-zodiaque"></div>
-            <div id="profil-client-signe-chinois"></div>
-            <div id="profil-client-couleur-bonheur"></div>
-            <div id="profil-client-animal-totem"></div>
+        
+        <h3>Profil du client</h3>
+        <div id="conteneur-client">
+            <div id="infos-client">
+                <div id="profil-client-civilite"></div>
+                <div id="profil-client-nom"></div>
+                <div id="profil-client-prenom"></div>
+                <div id="profil-client-naissance"></div>
+            </div>
+            <div id="signes-client">
+                <div id="profil-client-signe-zodiaque"></div>
+                <div id="profil-client-signe-chinois"></div>
+                <div id="profil-client-couleur-bonheur"></div>
+                <div id="profil-client-animal-totem"></div>
+            </div>
         </div>
         
         <h3>Historique du client</h3>
         <div id="conteneur-historique"></div>
         
-        <div id="bouton-commencer-terminer">
-            <button id="bouton-commencer">Commencer</button>
-            <button id="bouton-terminer">Terminer</button>
+        <div id="boutons-gestion-voyance">
+            <button class="joli-bouton" id="bouton-commencer">Commencer</button>
+            <button class="joli-bouton" id="bouton-terminer">Terminer</button>
         </div>
-        <div>
-            <button id="bouton-prediction">Générer prédictions</button>
-            <div id="amour"></div>
-            <div id="sante"></div>
-            <div id="travail"></div>
+        <div id="conteneur-prediction">
+            <div id="boite-bouton-prediction">
+                <button class="joli-bouton" id="bouton-prediction">Générer prédictions</button>
+            </div>
+            <div id="resultat-prediction">
+                <div class="prediction" id="prediction-amour"></div>
+                <div class="prediction" id="prediction-sante"></div>
+                <div class="prediction" id="prediction-travail"></div>
+            </div>
         </div>
         
         <script>
@@ -175,39 +182,41 @@ and open the template in the editor.
                             demandeVoyance.append(mediumNom);
                             let demandeStatut;  
                             let demandeHoraire;
+                            let demandeCommentaire;
                             if (response.historique[i].accepte === true){
-                                demandeStatut =  $('<div />').addClass("accepte").html("Demande acceptée");
-                                demandeHoraire = $('<div />').addClass("accepte").html(" ✓ " + response.historique[i].dateFin);
+                                demandeStatut =  $('<div />').addClass("accepte").html(" ✓ Demande acceptée");
+                                demandeHoraire = $('<div />').addClass("accepte").html(" Fin échange " + response.historique[i].dateFin);
+                                demandeCommentaire = $('<div />').addClass("accepte").html(" Commentaire " + response.historique[i].commentaire);
+                                
                             }
                             else {
-                                demandeStatut =  $('<div />').addClass("accepte").html(" ✘ Medium indisponible");
+                                demandeStatut =  $('<div />').addClass("refuse").html(" ✘ Medium indisponible");
                                 demandeHoraire = $('<br/>');
+                                demandeCommentaire = $('<br/>');
                             }
                             demandeVoyance.append(demandeStatut);
                             demandeVoyance.append(demandeHoraire);
+                            demandeVoyance.append(demandeCommentaire);
                             $("#conteneur-historique").append(demandeVoyance);
                         }
                     }
                     
                     //affichage des boutons commencer et terminer
-                    if (response.voyance.etape == 1){
+                    if (response.voyance.etape === 1){
                         document.getElementById("bouton-terminer").style.visibility = 'hidden';
                     }
-                    else if (response.voyance.etape == 2){
+                    else if (response.voyance.etape === 2){
                         document.getElementById("bouton-commencer").style.visibility = 'hidden';
                     }
-                    else if (response.voyance.etape == 3){
+                    else if (response.voyance.etape === 3){
                         window.location = "compteRenduVoyance.html";
                     }
                     
                     //predictions
-                    $("#amour").html("Amour"+"<br/>"+response.predictions.amour);
-                    $("#sante").html("Sante"+"<br/>"+response.predictions.sante);
-                    $("#travail").html("Travail"+"<br/>"+response.predictions.travail);
+                    $("#prediction-amour").html("Amour"+"<br/>"+response.predictions.amour);
+                    $("#prediction-sante").html("Sante"+"<br/>"+response.predictions.sante);
+                    $("#prediction-travail").html("Travail"+"<br/>"+response.predictions.travail);
                 }).fail( function (error) { // Appel KO => erreur a gérer
-                    
-                    // Popup avec message d'erreur :
-                    alert('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
                     // Message d'erreur dans la div #message :
                     $('#message').html('Erreur lors de l\'appel: HTTP Code ' + error.status + ' ~ ' + error.statusText + ' ~ ' + error.getResponseHeader('Content-Type'));
 
@@ -228,9 +237,10 @@ and open the template in the editor.
                     },
                     dataType: 'json'        // Type de retour attendu
                 }).done( function (response) {  // Appel OK => "response" contient le resultat JSON
-                    $("#amour").html("Amour"+"<br/>"+response.predictions.amour);
-                    $("#sante").html("Sante"+"<br/>"+response.predictions.sante);
-                    $("#travail").html("Travail"+"<br/>"+response.predictions.travail);
+                    $("#prediction-amour").html("Amour"+"<br/>"+response.predictions.amour);
+                    $("#prediction-sante").html("Sante"+"<br/>"+response.predictions.sante);
+                    $("#prediction-travail").html("Travail"+"<br/>"+response.predictions.travail);
+                    $("#message").hide();
                 }).fail( function (error) { // Appel KO => erreur a gérer
                     
                     // Popup avec message d'erreur :
@@ -290,6 +300,7 @@ and open the template in the editor.
             $(document).ready(function () { 
 
                 console.log('Page chargee => Debut du Script');
+                verifierSession();
                 infosVoyanceEnCours();
                     
                     

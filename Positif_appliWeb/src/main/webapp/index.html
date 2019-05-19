@@ -13,11 +13,11 @@
         <div id="box">
         <div id="box-connexion">
             <h3>Accès membres</h3>
-                <button id="bouton-connexion" class="joli-bouton">Connexion</button>   
+                <button class="joli-bouton" id="bouton-client">Connexion</button>   
         </div>
         <div id="box-connexion">
             <h3>Accès employés</h3>
-            <button id="bouton-inscription" class="joli-bouton">Connexion</button>
+            <button class="joli-bouton" id="bouton-employe">Connexion</button>
         </div>
         </div>
         
@@ -30,11 +30,11 @@
                 console.log('Page chargee => Debut du Script');
 
                 // ajout d'un "handler" sur le clic du bouton de connexion
-                $('#bouton-connexion').on('click', function () {
+                $('#bouton-client').on('click', function () {
                     window.location = "accueilClient.html";
                 });
                 
-                $("#bouton-inscription").click(function () {
+                $("#bouton-employe").click(function () {
                     window.location = "accueilEmploye.html";
                 });
                 

@@ -26,12 +26,14 @@ import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionGenererPredictions;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionRafraichirVoyanceEnCours;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionTerminerVoyance;
 import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionValiderCRVoyance;
+import fr.insalyon.b3246.dasi.positif_appliweb.actions.ActionVerificationSession;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ClientSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.DemandeDeVoyanceSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.EmployeSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.HistoriqueSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.ListeMediumsSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.PredictionsSerialisation;
+import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.SessionSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.VoyanceEnCoursSerialisation;
 import fr.insalyon.b3246.dasi.positif_appliweb.serialisations.TableauDeBordSerialisation;
 import java.io.IOException;
@@ -123,6 +125,15 @@ public class ActionServlet extends HttpServlet {
                     out.println("{\"inscription\": false, \"message\":\"Erreur dans l'inscription\"}");
                 }
                 break;
+                
+            case "verificationSession":
+                //action = new ActionVerificationSession();
+                
+                //action.executer(request);
+                serialisation = new SessionSerialisation();
+                serialisation.serialiser(request, response);
+                break;
+                
                 
             case "profilClient":
                 //On récupère l'identité du client depuis la session
