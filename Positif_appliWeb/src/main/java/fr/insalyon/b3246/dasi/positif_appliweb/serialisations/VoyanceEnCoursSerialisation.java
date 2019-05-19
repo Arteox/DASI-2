@@ -94,7 +94,7 @@ public class VoyanceEnCoursSerialisation extends Serialisation {
             
             jsonArrayVoyances.add(jsonVoyancetmp);
         }
-        jsonContainer.add("historiqueClient", jsonArrayVoyances);
+        jsonContainer.add("historique", jsonArrayVoyances);
         
         //on recupere les predictions generees
         List<String> predictions = (List<String>) request.getAttribute("predictions");
