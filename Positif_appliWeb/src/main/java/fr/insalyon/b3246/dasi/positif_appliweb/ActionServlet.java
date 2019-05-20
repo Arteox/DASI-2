@@ -76,7 +76,6 @@ public class ActionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        JpaUtil.init();
         HttpSession session = request.getSession(true);
         request.setCharacterEncoding("UTF-8");
         String todo = request.getParameter("todo");
@@ -127,9 +126,9 @@ public class ActionServlet extends HttpServlet {
                 break;
                 
             case "verificationSession":
-                //action = new ActionVerificationSession();
+                action = new ActionVerificationSession();
                 
-                //action.executer(request);
+                action.executer(request);
                 serialisation = new SessionSerialisation();
                 serialisation.serialiser(request, response);
                 break;
@@ -248,8 +247,6 @@ public class ActionServlet extends HttpServlet {
                 session.invalidate();
                 return;
         }
-
-        JpaUtil.destroy();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -290,6 +287,18 @@ public class ActionServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    public void init() throws ServletException {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+        JpaUtil.init();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy(); //To change body of generated methods, choose Tools | Templates.
+        JpaUtil.destroy();
+    }
 
 }
 
