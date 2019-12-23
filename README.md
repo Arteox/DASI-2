@@ -4,4 +4,4 @@ School project whose goal is to create a project based on the MVC (Model-View-Co
 
 Language used : Java
 
-Number of persons in the team : 2
+Authors : Baptiste PAULETTO, Louis UNG
